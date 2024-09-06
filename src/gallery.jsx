@@ -1,8 +1,24 @@
 import "./App.css"
+import { useState, useEffect } from 'react';
+import Loading from './loading';
 import { Link } from 'react-router-dom';
 import heart from './assets/ico-heart2.png';
 import logo from './assets/logo.png';
-const gallery = () => {
+const Gallery = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading period
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds loading time
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div>
       <div className="parent-div">
@@ -74,4 +90,4 @@ const gallery = () => {
   )
 }
 
-export default gallery
+export default Gallery

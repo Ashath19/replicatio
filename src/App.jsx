@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import "./App.css"
 import { Link } from 'react-router-dom';
 import heart from './assets/ico-heart2.png'; // Import the heart image
 import logo from './assets/logo.png'; // Import the logo image
 import bird1 from './assets/ico-bird-l.png'; // Adjust the path as needed
 import bird2 from './assets/ico-bird-r.png'; // Adjust the path as needed
+import Loading from './loading';
 
 const App = () => {
   const calculateTimeLeft = () => {
@@ -32,6 +33,20 @@ const App = () => {
 
     return () => clearTimeout(timer);
   }, [timeLeft]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading period
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds loading time
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div>
       <div className="parent-div">

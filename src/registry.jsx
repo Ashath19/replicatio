@@ -1,9 +1,25 @@
-import "./App.css"
+import "./App.css";
+import { useState, useEffect } from 'react';
+import Loading from './loading';
 import { Link } from 'react-router-dom';
 import heart from './assets/ico-heart2.png'; // Import the heart image
 import logo from './assets/logo.png';
 
-const registry = () => {
+const Registry = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate a loading period
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // 3 seconds loading time
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div>
       <div className="parent-div">
@@ -75,4 +91,4 @@ const registry = () => {
   )
 }
 
-export default registry
+export default Registry
